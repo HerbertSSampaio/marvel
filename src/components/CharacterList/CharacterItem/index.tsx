@@ -28,10 +28,9 @@ export default function CharacterItem({ id, name, description, thumbnail }: Char
                         </Typography>
                     </CardContent>
                     <CardActions>
-                    <Link  href={`/characters/${id}`} passHref>
-                        <Button variant="contained" color="secondary" className={classes.cardButton}>Learn More</Button>
-                    </Link>
-
+                        <Link  href={`/characters/${id}`} passHref>
+                            <Button variant="contained" color="secondary" className={classes.cardButton}>Learn More</Button>
+                        </Link>
                     </CardActions>
                 </Card>
             </Grid>

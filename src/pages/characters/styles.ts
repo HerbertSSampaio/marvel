@@ -9,7 +9,7 @@ export const useStyles = makeStyles({
         backgroundColor: "#424242",
         borderRadius: 10,
     },
-    comic: {
+    session: {
         marginTop: 60,
         marginBottom: 60,
     },

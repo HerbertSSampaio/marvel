@@ -2,7 +2,6 @@ import { Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Typ
 import { GetStaticPaths, GetStaticProps } from "next"
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import { api } from "../../services/api";
 
@@ -85,14 +84,14 @@ export default function Character({ character }: CharacterProps) {
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
-                                            <Link href={comic.details} passHref={true}>
+                                            <a href={comic.details} target="_blank" rel="noreferrer">
                                             <Button variant="contained" color="secondary" className={classes.cardButton}>Learn More</Button>
-                                            </Link>
+                                            </a>
                                         </CardActions>
                                     </div>
                                 </Card>
                             </Grid>
-                        ))};
+                        ))}
                     </Grid>
                 </Grid>
                 <Grid container spacing={5} className={classes.session}>
@@ -117,14 +116,14 @@ export default function Character({ character }: CharacterProps) {
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
-                                            <Link href={serie.details} passHref={true}>
+                                            <a href={serie.details} target="_blank" rel="noreferrer">
                                                 <Button variant="contained" color="secondary" className={classes.cardButton}>Learn More</Button>
-                                            </Link>
+                                            </a>
                                         </CardActions>
                                     </div>
                                 </Card>
                             </Grid>
-                        ))};
+                        ))}
                     </Grid>
                 </Grid>
                 <Grid container spacing={5} className={classes.session}>
@@ -149,14 +148,14 @@ export default function Character({ character }: CharacterProps) {
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
-                                            <Link href={event.details} passHref={true}>
+                                            <a href={event.details} target="_blank" rel="noreferrer">
                                                 <Button variant="contained" color="secondary" className={classes.cardButton}>Learn More</Button>
-                                            </Link>
+                                            </a>
                                         </CardActions>
                                     </div>
                                 </Card>
                             </Grid>
-                        ))};
+                        ))}
                     </Grid>
                 </Grid>
             </Container>
@@ -177,12 +176,34 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({params}) => {
     const { characterId } = params;
 
-    const findCharacter = await api.get(`/characters/${characterId}?ts=stringgrande5&apikey=7bef0f712b879922a50fccaee6d20219&hash=85f5fed85ba5469fe2e7f2d0c6320874`);
-    const findCharacterComic = await api.get(`/characters/${characterId}/comics?ts=stringgrande5&apikey=7bef0f712b879922a50fccaee6d20219&hash=85f5fed85ba5469fe2e7f2d0c6320874`);
-    const findCharacterSerie = await api.get(`/characters/${characterId}/series?ts=stringgrande5&apikey=7bef0f712b879922a50fccaee6d20219&hash=85f5fed85ba5469fe2e7f2d0c6320874`);
-    const findCharacterEvent = await api.get(`/characters/${characterId}/events?ts=stringgrande5&apikey=7bef0f712b879922a50fccaee6d20219&hash=85f5fed85ba5469fe2e7f2d0c6320874`);
-
-
+    const findCharacter = await api.get(`/characters/${characterId}`, {
+        params: {
+            ts: process.env.MARVEL_TS,
+            apikey: process.env.MARVEL_PUBLIC_KEY,
+            hash: process.env.MARVEL_HASH_MD5,
+        }
+    });
+    const findCharacterComic = await api.get(`/characters/${characterId}/comics`, {
+        params: {
+            ts: process.env.MARVEL_TS,
+            apikey: process.env.MARVEL_PUBLIC_KEY,
+            hash: process.env.MARVEL_HASH_MD5,
+        }
+    });
+    const findCharacterSerie = await api.get(`/characters/${characterId}/series`, {
+        params: {
+            ts: process.env.MARVEL_TS,
+            apikey: process.env.MARVEL_PUBLIC_KEY,
+            hash: process.env.MARVEL_HASH_MD5,
+        }
+    });
+    const findCharacterEvent = await api.get(`/characters/${characterId}/events`, {
+        params: {
+            ts: process.env.MARVEL_TS,
+            apikey: process.env.MARVEL_PUBLIC_KEY,
+            hash: process.env.MARVEL_HASH_MD5,
+        }
+    });
 
     const getCharacter = findCharacter.data.data.results[0]
     const getCharacterComic = findCharacterComic.data.data.results

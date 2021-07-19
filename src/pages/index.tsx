@@ -25,7 +25,13 @@ export default function Home({ characters }:CharactersProps ) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const resultCharacters = await api.get("/characters?ts=stringgrande5&apikey=7bef0f712b879922a50fccaee6d20219&hash=85f5fed85ba5469fe2e7f2d0c6320874");
+  const resultCharacters = await api.get(`/characters`, {
+    params: {
+      ts: process.env.MARVEL_TS,
+      apikey: process.env.MARVEL_PUBLIC_KEY,
+      hash: process.env.MARVEL_HASH_MD5,
+    }
+  });
 
   const characters = resultCharacters.data.data.results.map(character => {
     return {
