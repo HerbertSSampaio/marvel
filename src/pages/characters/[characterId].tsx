@@ -63,7 +63,7 @@ export default function Character({ character }: CharacterProps) {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container spacing={5} className={classes.comic}>
+                <Grid container spacing={5} className={classes.session}>
                     <Grid xs={12}>
                         <Typography variant="h2" noWrap>
                             Comics
@@ -92,10 +92,73 @@ export default function Character({ character }: CharacterProps) {
                                     </div>
                                 </Card>
                             </Grid>
-                        ))}
+                        ))};
                     </Grid>
                 </Grid>
-                
+                <Grid container spacing={5} className={classes.session}>
+                    <Grid xs={12}>
+                        <Typography variant="h2" noWrap>
+                            Series
+                        </Typography>
+                    </Grid>
+                    <Grid container spacing={4} className={classes.cardList}>
+                        {character.series.map((serie) => (
+                            <Grid key={serie.id} item xs={2}>
+                                <Card className={classes.card}>
+                                    <div>
+                                        <CardMedia>
+                                            <Image src={serie.thumbnail} width="300" height="450" alt={serie.title} />
+                                        </CardMedia>
+                                    </div>
+                                    <div>
+                                        <CardContent className={classes.cardDescription}>
+                                            <Typography variant="body2">
+                                                {serie.title}
+                                            </Typography>
+                                        </CardContent>
+                                        <CardActions>
+                                            <Link href={serie.details} passHref={true}>
+                                                <Button variant="contained" color="secondary" className={classes.cardButton}>Learn More</Button>
+                                            </Link>
+                                        </CardActions>
+                                    </div>
+                                </Card>
+                            </Grid>
+                        ))};
+                    </Grid>
+                </Grid>
+                <Grid container spacing={5} className={classes.session}>
+                    <Grid xs={12}>
+                        <Typography variant="h2" noWrap>
+                            Events
+                        </Typography>
+                    </Grid>
+                    <Grid container spacing={4} className={classes.cardList}>
+                        {character.events.map((event) => (
+                            <Grid key={event.id} item xs={2}>
+                                <Card className={classes.card}>
+                                    <div>
+                                        <CardMedia>
+                                            <Image src={event.thumbnail} width="300" height="450" alt={event.title} />
+                                        </CardMedia>
+                                    </div>
+                                    <div>
+                                        <CardContent className={classes.cardDescription}>
+                                            <Typography variant="body2">
+                                                {event.title}
+                                            </Typography>
+                                        </CardContent>
+                                        <CardActions>
+                                            <Link href={event.details} passHref={true}>
+                                                <Button variant="contained" color="secondary" className={classes.cardButton}>Learn More</Button>
+                                            </Link>
+                                        </CardActions>
+                                    </div>
+                                </Card>
+                            </Grid>
+                        ))};
+                    </Grid>
+                </Grid>
             </Container>
 
         </>
