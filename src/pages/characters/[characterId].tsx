@@ -176,40 +176,35 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({params}) => {
     const { characterId } = params;
 
-    const findCharacter = await api.get(`/characters/${characterId}`, {
+    const getCharacter = await api.get(`/characters/${characterId}`, {
         params: {
             ts: process.env.MARVEL_TS,
             apikey: process.env.MARVEL_PUBLIC_KEY,
             hash: process.env.MARVEL_HASH_MD5,
         }
-    });
-    const findCharacterComic = await api.get(`/characters/${characterId}/comics`, {
+    }).then(response => (response.data.data.results[0]));
+    const getCharacterComic = await api.get(`/characters/${characterId}/comics`, {
         params: {
             ts: process.env.MARVEL_TS,
             apikey: process.env.MARVEL_PUBLIC_KEY,
             hash: process.env.MARVEL_HASH_MD5,
         }
-    });
-    const findCharacterSerie = await api.get(`/characters/${characterId}/series`, {
+    }).then(response => (response.data.data.results));
+    const getCharacterSerie = await api.get(`/characters/${characterId}/series`, {
         params: {
             ts: process.env.MARVEL_TS,
             apikey: process.env.MARVEL_PUBLIC_KEY,
             hash: process.env.MARVEL_HASH_MD5,
         }
-    });
-    const findCharacterEvent = await api.get(`/characters/${characterId}/events`, {
+    }).then(response => (response.data.data.results));
+    const getCharacterEvent = await api.get(`/characters/${characterId}/events`, {
         params: {
             ts: process.env.MARVEL_TS,
             apikey: process.env.MARVEL_PUBLIC_KEY,
             hash: process.env.MARVEL_HASH_MD5,
         }
-    });
-
-    const getCharacter = findCharacter.data.data.results[0]
-    const getCharacterComic = findCharacterComic.data.data.results
-    const getCharacterSerie = findCharacterSerie.data.data.results
-    const getCharacterEvent = findCharacterEvent.data.data.results
-
+    }).then(response => (response.data.data.results));
+    
     const character = {
         id: getCharacter.id,
         name: getCharacter.name,

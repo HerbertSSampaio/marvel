@@ -14,7 +14,7 @@ export default function CharacterItem({ id, name, description, thumbnail }: Char
     const classes = useStyles();
 
     return (
-            <Grid item xs={6} sm={4} md={3} className={classes.root}>
+            <Grid item xs={4} sm={3} md={2} className={classes.root}>
                 <Card>
                     <CardMedia>
                         <Image src={thumbnail} width="300" height="450" alt={name} />
