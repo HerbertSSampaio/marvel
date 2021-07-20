@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Typography } from "@material-ui/core";
+import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
 import { GetStaticPaths, GetStaticProps } from "next"
 import Head from "next/head";
 import Image from "next/image";
@@ -9,21 +9,7 @@ import { api } from "../../services/api";
 
 import { useStyles } from './styles';
 
-type Comic = {
-    id: number;
-    title: string;
-    thumbnail: string;
-    details: string;
-}
-
-type Serie = {
-    id: number;
-    title: string;
-    thumbnail: string;
-    details: string;
-}
-
-type Event = {
+type Participation = {
     id: number;
     title: string;
     thumbnail: string;
@@ -36,9 +22,9 @@ interface CharacterProps {
         name: string;
         description: string;
         thumbnail: string;
-        comics: Comic[];
-        series: Serie[];
-        events: Event[];
+        comics: Participation[];
+        series: Participation[];
+        events: Participation[];
     }
 }
 
@@ -51,14 +37,28 @@ export default function Character({ character }: CharacterProps) {
                 <title>{ character.name } | Marvel</title>
             </Head>
             <Container className={classes.root}>
-                <Grid>
-                    <Link href="/">
+                <Box>
+                    <Link href="/" passHref>
                         <Button variant="outlined">	&#9664; Go Back</Button>
                     </Link>
-                </Grid>
-                <Grid container spacing={5} className={classes.header}>
-                    <Grid item md={3} className={classes.characterImage}>
-                        <Image src={character.thumbnail} width="300" height="450" alt={character.name} />
+                </Box>
+                <Grid 
+                    container 
+                    spacing={5} 
+                    className={classes.header} 
+                    component="header"
+                >
+                    <Grid 
+                        item 
+                        md={3} 
+                        className={classes.characterImage}
+                    >
+                        <Image 
+                            src={character.thumbnail} 
+                            width="300" 
+                            height="450" 
+                            alt={character.name} 
+                        />
                     </Grid>
                     <Grid item md={9}>
                         <Typography variant="h1" align="center">
@@ -69,32 +69,31 @@ export default function Character({ character }: CharacterProps) {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container spacing={5} className={classes.session}>
-                    <Grid xs={12}>
+                <Box component="section" className={classes.section}>
+                    <Box component="header">
                         <Typography variant="h2" noWrap>
                             Comics
                         </Typography>
-                    </Grid>
+                    </Box>
                     <CharacterParticipationList participations={character.comics} />
-                </Grid>
-                <Grid container spacing={5} className={classes.session}>
-                    <Grid xs={12}>
+                </Box>
+                <Box component="section" className={classes.section}>
+                    <Box component="header">
                         <Typography variant="h2" noWrap>
                             Series
                         </Typography>
-                    </Grid>
+                    </Box>
                     <CharacterParticipationList participations={character.series} />
-                </Grid>
-                <Grid container spacing={5} className={classes.session}>
-                    <Grid xs={12}>
+                </Box>
+                <Box component="section" className={classes.section}>
+                    <Box component="header">
                         <Typography variant="h2" noWrap>
                             Events
                         </Typography>
-                    </Grid>
+                    </Box>
                     <CharacterParticipationList participations={character.events} />
-                </Grid>
+                </Box>
             </Container>
-
         </>
     )
 }

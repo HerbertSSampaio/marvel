@@ -9,24 +9,28 @@ export const useStyles = makeStyles({
         height: 100,
     },
     cardTitle: {
+        marginBottom: 10,
+
         fontSize: 18,
         fontWeight: "bold",
-        marginBottom: 10,
     },
     cardDescription: {
         display: "-webkit-box",
         boxOrient: "vertical",
         lineClamp: 2,
         wordBreak: "break-all",
+        
         overflow: "hidden",
     },
     cardButton: {
-        fontWeight: "bolder",
         marginLeft: "auto",
-
-        backgroundColor: "#e62429",
         padding: 8,
         borderRadius: 0,
+
+        backgroundColor: "#e62429",
+
+        fontWeight: "bolder",
+
         clipPath: "polygon(10% 0%, 100% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 100%, 0% 30%)",
     }
 });

@@ -8,13 +8,14 @@ export const useStyles = makeStyles({
     },
     header: {
         marginTop: 20,
-        backgroundColor: "#424242",
         borderRadius: 10,
+
+        backgroundColor: "#424242",
     },
     characterImage: {
         margin: "auto",
     },
-    session: {
+    section: {
         marginTop: 30,
         marginBottom: 60,
         padding: 40,

@@ -1,22 +1,22 @@
 import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles({
-    root: {
+    buttonList: {
         width: "100%",
+
         marginTop: 20,
         marginBottom: 20,
-        display: "flex",
-        justifyContent: "center",
     },
     normal: {
-        fontWeight: "bold",
+        margin: 4,
+        padding: 10,
+        border: "none",
 
         backgroundColor: "#656565",
         color: "#fff",
 
-        border: "none",
-        margin: 4,
-        padding: 10,
+        fontWeight: "bold",
+
         cursor: "pointer",
     },
     active: {

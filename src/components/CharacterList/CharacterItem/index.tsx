@@ -14,22 +14,46 @@ export default function CharacterItem({ id, name, description, thumbnail }: Char
     const classes = useStyles();
 
     return (
-            <Grid item xs={4} sm={3} md={2} className={classes.root}>
+            <Grid 
+                item 
+                xs={4} 
+                sm={3} 
+                md={2} 
+                className={classes.root}
+            >
                 <Card>
                     <CardMedia>
-                        <Image src={thumbnail} width="300" height="450" alt={name} />
+                        <Image 
+                            src={thumbnail} 
+                            width="300" 
+                            height="450" 
+                            alt={name} 
+                        />
                     </CardMedia>
                     <CardContent className={classes.content}>
-                        <Typography variant="h2" className={classes.cardTitle} noWrap>
+                        <Typography 
+                            variant="h2" 
+                            className={classes.cardTitle} 
+                            noWrap
+                        >
                             {name}
                         </Typography>
-                        <Typography variant="body1" className={classes.cardDescription}>
+                        <Typography 
+                            variant="body1" 
+                            className={classes.cardDescription}
+                        >
                             {description}
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Link  href={`/characters/${id}`} passHref>
-                            <Button variant="contained" color="secondary" className={classes.cardButton}>Learn More</Button>
+                        <Link href={`/characters/${id}`} passHref>
+                            <Button 
+                                variant="contained" 
+                                color="secondary" 
+                                className={classes.cardButton}
+                            >
+                                Learn More
+                            </Button>
                         </Link>
                     </CardActions>
                 </Card>

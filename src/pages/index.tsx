@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import CharacterList from "../components/CharacterList";
 import Pagination from "../components/Pagination";
 import { api } from "../services/api";
-import { useStyles } from "./home.styles";
+import { useStyles } from "./styles";
 
 type Character = {
   id: number;
@@ -60,7 +60,7 @@ export default function Home({ initialCharacters, initialPagination }:Characters
             setIsLoading={setIsLoading} 
             totalItens={pagination.totalResults}
           />
-          <Grid container className={classes.root}>
+          <Grid container className={classes.cards}>
             {
               isLoading ? (
                 <CircularProgress className={classes.spinner} />

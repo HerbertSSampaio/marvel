@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core';
+import { Box, Container, Grid, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 
 interface PaginationProps {
@@ -18,8 +18,12 @@ export default function Pagination({ pages, activePage, totalItens, setIsLoading
     }
 
     return (
-        <>
-            <Grid className={classes.root}>
+        <Container>
+            <Grid 
+                container 
+                justifyContent="center" 
+                className={classes.buttonList}
+            >
                 {pages.map((number) => 
                     <button 
                         key={number} 
@@ -30,13 +34,12 @@ export default function Pagination({ pages, activePage, totalItens, setIsLoading
                     </button> 
                     )}
             </Grid>
-            <Grid className={classes.root}>
+            <Grid container justifyContent="center">
                 <Typography variant="body1" className={classes.range}>
                     {(activePage - 1) * 60} - {((activePage * 60) > totalItens) ? totalItens : activePage * 60} of {totalItens}
                 </Typography>
-
             </Grid>
-        </>
+        </Container>
     )
 }
 

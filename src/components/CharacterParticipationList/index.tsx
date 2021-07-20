@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@material-ui/core";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@material-ui/core";
 import Image from "next/image";
 import { useStyles } from "./styles";
 
@@ -20,15 +20,22 @@ export default function CharacterParticipationList({ participations }: Character
         (participations.length === 0) ? (
             <Grid 
                 container 
-                spacing={4} 
+                spacing={4}
                 className={classes.cardList}
             >
-                <Typography variant="body1" className={classes.noParticipation}>
+                <Typography 
+                    variant="body1" 
+                    className={classes.noParticipation}
+                >
                     No Participations
                 </Typography>
             </Grid>
         ) : (
-            <Grid container spacing={4} className={classes.cardList}>
+            <Grid 
+                container 
+                spacing={4} 
+                className={classes.cardList}
+            >
                 {participations.map((participation) => (
                     <Grid 
                         key={participation.id} 
@@ -38,7 +45,7 @@ export default function CharacterParticipationList({ participations }: Character
                         md={2}
                     >
                         <Card className={classes.card}>
-                            <div>
+                            <Box>
                                 <CardMedia>
                                     <Image 
                                         src={participation.thumbnail} 
@@ -47,9 +54,9 @@ export default function CharacterParticipationList({ participations }: Character
                                         alt={participation.title} 
                                     />
                                 </CardMedia>
-                            </div>
-                            <div>
-                                <CardContent className={classes.cardTitle}>
+                            </Box>
+                            <Box>
+                                <CardContent className={classes.cardName}>
                                     <Typography variant="body2">
                                         {participation.title}
                                     </Typography>
@@ -65,7 +72,7 @@ export default function CharacterParticipationList({ participations }: Character
                                         Learn More
                                     </Button>
                                 </CardActions>
-                            </div>
+                            </Box>
                         </Card>
                     </Grid>
                 ))}
