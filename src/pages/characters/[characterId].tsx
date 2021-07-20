@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next"
 import Head from "next/head";
 import Image from "next/image";
 import React from "react";
+import CharacterParticipationList from "../../components/CharacterParticipationList";
 import { api } from "../../services/api";
 
 import { useStyles } from './styles';
@@ -68,31 +69,7 @@ export default function Character({ character }: CharacterProps) {
                             Comics
                         </Typography>
                     </Grid>
-                    <Grid container spacing={4} className={classes.cardList}>
-                        {character.comics.map((comic) => (
-                            <Grid key={comic.id} item xs={2}>
-                                <Card className={classes.card}>
-                                    <div>
-                                        <CardMedia>
-                                            <Image src={comic.thumbnail} width="300" height="450" alt={comic.title} />
-                                        </CardMedia>
-                                    </div>
-                                    <div>
-                                        <CardContent className={classes.cardDescription}>
-                                            <Typography variant="body2">
-                                                {comic.title}
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <a href={comic.details} target="_blank" rel="noreferrer">
-                                            <Button variant="contained" color="secondary" className={classes.cardButton}>Learn More</Button>
-                                            </a>
-                                        </CardActions>
-                                    </div>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
+                    <CharacterParticipationList participations={character.comics} />
                 </Grid>
                 <Grid container spacing={5} className={classes.session}>
                     <Grid xs={12}>
@@ -100,31 +77,7 @@ export default function Character({ character }: CharacterProps) {
                             Series
                         </Typography>
                     </Grid>
-                    <Grid container spacing={4} className={classes.cardList}>
-                        {character.series.map((serie) => (
-                            <Grid key={serie.id} item xs={2}>
-                                <Card className={classes.card}>
-                                    <div>
-                                        <CardMedia>
-                                            <Image src={serie.thumbnail} width="300" height="450" alt={serie.title} />
-                                        </CardMedia>
-                                    </div>
-                                    <div>
-                                        <CardContent className={classes.cardDescription}>
-                                            <Typography variant="body2">
-                                                {serie.title}
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <a href={serie.details} target="_blank" rel="noreferrer">
-                                                <Button variant="contained" color="secondary" className={classes.cardButton}>Learn More</Button>
-                                            </a>
-                                        </CardActions>
-                                    </div>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
+                    <CharacterParticipationList participations={character.series} />
                 </Grid>
                 <Grid container spacing={5} className={classes.session}>
                     <Grid xs={12}>
@@ -132,31 +85,7 @@ export default function Character({ character }: CharacterProps) {
                             Events
                         </Typography>
                     </Grid>
-                    <Grid container spacing={4} className={classes.cardList}>
-                        {character.events.map((event) => (
-                            <Grid key={event.id} item xs={2}>
-                                <Card className={classes.card}>
-                                    <div>
-                                        <CardMedia>
-                                            <Image src={event.thumbnail} width="300" height="450" alt={event.title} />
-                                        </CardMedia>
-                                    </div>
-                                    <div>
-                                        <CardContent className={classes.cardDescription}>
-                                            <Typography variant="body2">
-                                                {event.title}
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <a href={event.details} target="_blank" rel="noreferrer">
-                                                <Button variant="contained" color="secondary" className={classes.cardButton}>Learn More</Button>
-                                            </a>
-                                        </CardActions>
-                                    </div>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
+                    <CharacterParticipationList participations={character.events} />
                 </Grid>
             </Container>
 
