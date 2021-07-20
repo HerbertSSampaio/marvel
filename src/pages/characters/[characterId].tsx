@@ -2,6 +2,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Typ
 import { GetStaticPaths, GetStaticProps } from "next"
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import CharacterParticipationList from "../../components/CharacterParticipationList";
 import { api } from "../../services/api";
@@ -50,12 +51,17 @@ export default function Character({ character }: CharacterProps) {
                 <title>{ character.name } | Marvel</title>
             </Head>
             <Container className={classes.root}>
+                <Grid>
+                    <Link href="/">
+                        <Button variant="outlined">	&#9664; Go Back</Button>
+                    </Link>
+                </Grid>
                 <Grid container spacing={5} className={classes.header}>
-                    <Grid item md={3}>
+                    <Grid item md={3} className={classes.characterImage}>
                         <Image src={character.thumbnail} width="300" height="450" alt={character.name} />
                     </Grid>
                     <Grid item md={9}>
-                        <Typography variant="h1" noWrap>
+                        <Typography variant="h1" align="center">
                             {character.name}
                         </Typography>
                         <Typography variant="body1">
