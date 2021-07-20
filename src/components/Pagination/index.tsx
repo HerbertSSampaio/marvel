@@ -5,17 +5,11 @@ interface PaginationProps {
     pages: number[],
     activePage: number,
     totalItens: number,
-    setCurrentPage: (number: number) => void;
-    setIsLoading: (boolean: boolean) => void;
+    handlePage: (number: number) => void;
 }
 
-export default function Pagination({ pages, activePage, totalItens, setIsLoading, setCurrentPage }:PaginationProps) {
+export default function Pagination({ pages, activePage, totalItens, handlePage }:PaginationProps) {
     const classes = useStyles();
-
-    function handleButton(pageNumber): void {
-        setCurrentPage(pageNumber);
-        setIsLoading(true);
-    }
 
     return (
         <Container>
@@ -27,7 +21,7 @@ export default function Pagination({ pages, activePage, totalItens, setIsLoading
                 {pages.map((number) => 
                     <button 
                         key={number} 
-                        onClick={() => handleButton(number+1)}
+                        onClick={() => handlePage(number+1)}
                         className={`${classes.normal} ${(activePage === number+1) ? classes.active : null }`}
                     >
                             {number+1}

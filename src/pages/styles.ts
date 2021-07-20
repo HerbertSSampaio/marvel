@@ -8,4 +8,11 @@ export const useStyles = makeStyles({
     spinner: {
         margin: "auto",
     },
+    form: {
+        marginTop: 20,
+        marginBottom: 40,
+    },
+    buttonGroup: {
+        height: "100%",
+    },
 });

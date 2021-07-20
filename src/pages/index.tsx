@@ -1,4 +1,4 @@
-import { CircularProgress, Container, Grid } from "@material-ui/core";
+import { Button, ButtonGroup, CircularProgress, Container, Grid, TextField } from "@material-ui/core";
 import axios from "axios";
 import { GetStaticProps } from "next";
 import { useEffect, useState } from "react";
@@ -30,34 +30,96 @@ export default function Home({ initialCharacters, initialPagination }:Characters
   const [characters, setCharacters] = useState<Character[]>(initialCharacters);
   const [pagination, setPagination] = useState(initialPagination);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [characterName, setCharacterName] = useState('');
 
-  useEffect(() => {
-    async function loadNewCharacters(): Promise<void> {
-      if(currentPage === 0 || currentPage > pagination.totalPages) {
-        return;
+  function handleSubmit() {
+    setCurrentPage(1);
+    setIsLoading(true);
+    loadNewCharacters(characterName, 1);
+  }
+
+  function handleKeyDown(event) {
+    if (event.key === 'Enter') {
+      handleSubmit()
+      event.preventDefault();
+    }
+  }
+
+  function handleClear() {
+    setCharacterName('');
+    setCurrentPage(1);
+    setIsLoading(true);
+    loadNewCharacters('', 1);
+  }
+
+  function handlePage(pageNumber): void {
+    setCurrentPage(pageNumber);
+    setIsLoading(true);
+    loadNewCharacters(characterName, pageNumber);
+  }
+
+  async function loadNewCharacters(name: string, pageNumber: number): Promise<void> {
+    if(currentPage === 0 || currentPage > pagination.totalPages) {
+      return;
+    }
+    const response = await axios.get("api/characters", {
+      params: {
+        currentPage: pageNumber,
+        characterName: name,
       }
-      const newCharacters = await axios.get("api/characters", {
-        params: {
-          currentPage,
-        }
-      }).then((response) => response.data);
-    
-      setCharacters(newCharacters);
-      setIsLoading(false);
-    };
+    }).then((response) => response.data);
 
-    loadNewCharacters()
-  },[currentPage, pagination]);
+    const newCharacters = response[1];
+    const newPagination = response[0];
+    
+    setCharacters(newCharacters);
+    setPagination(newPagination);
+    setIsLoading(false);
+  };
 
   return (
     <>
+      <Grid 
+        component="header" 
+        container 
+        justifyContent="center" 
+        className={classes.form}
+      >
+        <form>
+          <TextField 
+            color="secondary" 
+            label="Character Name" 
+            value={characterName} 
+            onChange={event => setCharacterName(event.target.value)}
+            onKeyDown={handleKeyDown}
+            variant="outlined"
+          />
+          <ButtonGroup 
+            aria-label="contained button group" 
+            variant="contained" 
+            className={classes.buttonGroup}
+          >
+            <Button 
+              color="primary" 
+              onClick={() => handleSubmit()}
+            >
+              Search
+            </Button>
+            <Button 
+              color="secondary" 
+              onClick={() => handleClear()}
+            >
+              Clear
+            </Button>
+          </ButtonGroup>
+        </form>
+      </Grid>
       <Container>
           <Pagination 
             pages={Array.from(Array(pagination.totalPages).keys())} 
-            setCurrentPage={setCurrentPage} 
+            handlePage={handlePage} 
             activePage={currentPage} 
-            setIsLoading={setIsLoading} 
             totalItens={pagination.totalResults}
           />
           <Grid container className={classes.cards}>
